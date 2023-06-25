@@ -24,6 +24,12 @@ const initialState: NoteState = {
   ]
 }
 
+function isNoteExist(notes: Note[], title: string): boolean {
+  const note = notes.find((note: Note) => note.title === title)
+  console.log('note :>> ', note)
+  return note ? true : false
+}
+
 export const noteSlice = createSlice({
   name: 'note',
   initialState,
@@ -45,7 +51,15 @@ export const noteSlice = createSlice({
         title: action.payload.title,
         body: action.payload.body
       }
-      state.notes.push(note)
+      const isNoteExistBefore = isNoteExist(state.notes, note.title)
+      if (isNoteExistBefore) {
+        console.warn('This title of note exist before')
+        return
+      }
+      return {
+        ...state,
+        notes: [...state.notes, note]
+      }
     }
   }
 })

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Home from './pages/Home'
 import Layout from './components/Layout'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
